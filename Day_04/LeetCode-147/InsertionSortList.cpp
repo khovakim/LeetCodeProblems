@@ -31,7 +31,6 @@
 // The number of nodes in the list is in the range [1, 5000].
 // -5000 <= Node.val <= 5000
 
-#include <vector>
 
 struct ListNode {
   int val;
@@ -41,42 +40,76 @@ struct ListNode {
   ListNode(int x, ListNode *next) : val(x), next(next) {}
   };
 
-class Solution {
-private:
-    int listLenght(ListNode* head)
-    {
-        int len = 0;
 
-        while (head != nullptr) {
-            ++len;
-            head = head->next;
-        }
-        return len;
-    }
+class Solution {
 public:
     ListNode* insertionSortList(ListNode* head) {
-        int len = listLenght(head);
-        std::vector<ListNode*> vec(len);
-        ListNode* node = head;
-        for (int i = 0; i < vec.size(); ++i) {
-            vec[i] = node;
-            node = node->next;
-        }
-        int j, key;
-        for (int i = 1; i < vec.size(); ++i) {
-            j = i - 1;
-            key = vec[i]->val;
-            while (j >= 0 && vec[j]->val > key) {
-                vec[j + 1]->val = vec[j]->val;
-                --j;
+        if (head) {
+            ListNode *curr = head;
+            ListNode *node = head;
+            bool flag = true;
+            int tmp = 0;
+            while (curr && curr->next) {
+                flag = true;
+                while (curr && curr->next && (curr->val > curr->next->val)) {
+                    tmp = curr->val;
+                    curr->val = curr->next->val;
+                    curr->next->val = tmp;
+                    curr = curr->next;
+                    flag = false;
+                }
+                if (flag == false) {
+                    curr = node;
+                } else {
+                    curr = curr->next;
+                }
             }
-            vec[j + 1]->val = key;
         }
-        for (int i = 0; i < vec.size() - 1; ++i) {
-            vec[i]->next = vec[i + 1];
-        }
-        vec[vec.size() - 1]->next = nullptr;
-        head = vec[0];
         return head;
     }
 };
+
+
+// another solution
+
+//#include <vector>
+
+// class Solution {
+// private:
+//     int listLenght(ListNode* head)
+//     {
+//         int len = 0;
+
+//         while (head != nullptr) {
+//             ++len;
+//             head = head->next;
+//         }
+//         return len;
+//     }
+// public:
+//     ListNode* insertionSortList(ListNode* head) {
+//         int len = listLenght(head);
+//         std::vector<ListNode*> vec(len);
+//         ListNode* node = head;
+//         for (int i = 0; i < vec.size(); ++i) {
+//             vec[i] = node;
+//             node = node->next;
+//         }
+//         int j, key;
+//         for (int i = 1; i < vec.size(); ++i) {
+//             j = i - 1;
+//             key = vec[i]->val;
+//             while (j >= 0 && vec[j]->val > key) {
+//                 vec[j + 1]->val = vec[j]->val;
+//                 --j;
+//             }
+//             vec[j + 1]->val = key;
+//         }
+//         for (int i = 0; i < vec.size() - 1; ++i) {
+//             vec[i]->next = vec[i + 1];
+//         }
+//         vec[vec.size() - 1]->next = nullptr;
+//         head = vec[0];
+//         return head;
+//     }
+// };
