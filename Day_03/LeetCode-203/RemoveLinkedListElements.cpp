@@ -34,6 +34,29 @@ struct ListNode {
   ListNode(int x, ListNode *next) : val(x), next(next) {}
   };
 
+//  Recursive solution
+
+// class Solution {
+// public:
+//     ListNode* removeElements(ListNode* head, int val) {
+//         if (head == nullptr) {
+//             return nullptr;
+//         }
+//         if (head->val == val) {
+//             ListNode* tmp = head;
+//             head = head->next;
+//             delete tmp;
+//             if (head)
+//                 return removeElements(head, val);
+//         }
+//         if (head != nullptr) {
+//             head->next = removeElements(head->next, val);
+//         }
+//         return head;
+//     }
+// };
+
+
 class Solution {
 public:
     ListNode* removeElements(ListNode* head, int val) {

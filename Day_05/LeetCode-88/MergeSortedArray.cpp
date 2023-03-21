@@ -41,25 +41,50 @@
 
 #include <vector>
 
+
+
 class Solution {
 public:
     void merge(std::vector<int>& nums1, int m, const std::vector<int>& nums2, int n) {
         if (n == 0) {
             return ;
         }
-        for (int i = 0; i < n; ++i) {
-            nums1[m + i] = nums2[i];
-        }
-
-        int j, key;
-        for (int i = m; i < nums1.size(); ++i) {
-            j = i - 1;
-            key = nums1[i];
-            while (j >= 0 && nums1[j] > key) {
-                nums1[j + 1] = nums1[j];
-                --j;
+        int k = m - 1;
+        int z = n - 1;
+        for (int i = nums1.size() - 1; i >= 0; --i) {
+            if (z < 0 || k >= 0 && nums1[k] >= nums2[z]) {
+                nums1[i] = nums1[k];
+                --k;
+            } else if (k < 0 || z >= 0 && nums1[k] < nums2[z]){
+                nums1[i] = nums2[z];
+                --z;
             }
-            nums1[j + 1] = key;
         }
     }
 };
+
+
+// another solution
+
+// class Solution {
+// public:
+//     void merge(std::vector<int>& nums1, int m, const std::vector<int>& nums2, int n) {
+//         if (n == 0) {
+//             return ;
+//         }
+//         for (int i = 0; i < n; ++i) {
+//             nums1[m + i] = nums2[i];
+//         }
+
+//         int j, key;
+//         for (int i = m; i < nums1.size(); ++i) {
+//             j = i - 1;
+//             key = nums1[i];
+//             while (j >= 0 && nums1[j] > key) {
+//                 nums1[j + 1] = nums1[j];
+//                 --j;
+//             }
+//             nums1[j + 1] = key;
+//         }
+//     }
+// };

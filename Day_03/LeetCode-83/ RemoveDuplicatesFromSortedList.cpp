@@ -32,6 +32,30 @@
   ListNode(int x, ListNode *next) : val(x), next(next) {}
   };
 
+
+//  Recursive solution
+
+// class Solution {
+// public:
+//     ListNode* deleteDuplicates(ListNode* head) {
+//         if (head == nullptr) {
+//             return nullptr;
+//         }
+//         if (head->next && head->val == head->next->val) {
+//             ListNode* tmp = head->next;
+//             head->next = tmp->next;
+//             delete tmp;
+//             return deleteDuplicates(head);
+//         }
+//         head->next = deleteDuplicates(head->next);
+//         return head;
+//     }
+// };
+
+
+
+
+
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
