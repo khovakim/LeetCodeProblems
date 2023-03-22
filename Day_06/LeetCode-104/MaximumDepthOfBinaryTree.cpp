@@ -32,6 +32,8 @@ struct TreeNode {
 
 //  Recursive solution
 
+#include <algorithm>
+
 class Solution {
 public:
     int maxDepth(TreeNode* root) {
@@ -40,7 +42,7 @@ public:
         }
         int left = maxDepth(root->left);
         int right = maxDepth(root->right);
-        return 1 + left > right ? left : right;
+        return 1 + std::max(left, right);
     }
 };
 
