@@ -34,6 +34,24 @@ struct ListNode {
   ListNode(int x, ListNode *next) : val(x), next(next) {}
   };
 
+
+//  recursive solution
+
+// class Solution {
+// public:
+//     ListNode* reverseList(ListNode* head) {
+//         if (head == nullptr || head->next == nullptr) {
+//             return head;
+//         }
+//         ListNode* recNode = reverseList(head->next);
+//         head->next->next = head;
+//         std::cout << head->val << std::endl;
+//         head->next = nullptr;
+//         return recNode;
+//     }
+// };
+
+
 class Solution {
 private:
     int listLenght(ListNode* head)
